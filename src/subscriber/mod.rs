@@ -29,10 +29,11 @@ pub mod validator;
 #[async_trait]
 pub trait Subscriber {
     type SubMapper: SubscriptionMapper;
+    type SocketType: WebSocket; // Use WebSocket by default
 
     async fn subscribe<Exchange, Kind>(
         subscriptions: &[Subscription<Exchange, Kind>],
-    ) -> Result<(WebSocket, Map<Instrument>), SocketError>
+    ) -> Result<(SocketType, Map<Instrument>), SocketError>
     where
         Exchange: Connector + Send + Sync,
         Kind: SubKind + Send + Sync,
