@@ -29,7 +29,7 @@ pub mod validator;
 #[async_trait]
 pub trait Subscriber {
     type SubMapper: SubscriptionMapper;
-    type SocketType: WebSocket; // Use WebSocket by default
+    type SocketType: WebSocket; // Use WebSocket by default if none set
 
     async fn subscribe<Exchange, Kind>(
         subscriptions: &[Subscription<Exchange, Kind>],
